@@ -18,13 +18,13 @@ int strlen_custom(const char* string) {
     return len;
 }
 
-void clearstr(char* string) {
+char* clearstr(char* string) {
     for (int i = 0; i < strlen_custom(string); i++) {
         string[i] = '\0';
     }
 }
 
-void splitstr(char* string, int len, char** to_set) {
+char** splitstr(char* string, int len) {
     int str_length = strlen_custom(string);
     int final_size = str_length / len;
     char* strings[final_size];
@@ -46,7 +46,7 @@ void splitstr(char* string, int len, char** to_set) {
         current_cursor++;
     }
 
-    *to_set = strings;
+    return strings;
 }
 
 char* remove_first(char* string) {
