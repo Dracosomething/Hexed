@@ -27,24 +27,26 @@ char* clearstr(char* string) {
 char** splitstr(char* string, int len) {
     int str_length = strlen_custom(string);
     int final_size = str_length / len;
-    char* strings[final_size];
+    char** strings = malloc(final_size * sizeof(char*));
+
     int strings_cursor = 0;
-    
-    char current[len];
     int current_cursor = 0;
+    
     for (int i = 0; i < str_length; i++) {
         char character = string[i];
-
+        
         if (current_cursor >= len) {
-            strings[strings_cursor] = current;
-            strings_cursor++;
-            clearstr(current);
-            continue;
+            strings[strings_cursor++][current_cursor] = '\0';
+            current_cursor = 0;
         }
 
-        current[current_cursor] = character;
-        current_cursor++;
+        if (current_cursor == 0) {
+            strings[strings_cursor] = malloc(len * sizeof(len) + 1);
+        }
+        
+        strings[strings_cursor][current_cursor++] = character;
     }
+    strings[strings_cursor][current_cursor] = '\0';
 
     return strings;
 }

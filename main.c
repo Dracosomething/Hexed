@@ -12,6 +12,13 @@ int main(void) {
         hex_string = remove_first(hex_string);
     }
 
-    printf("input %s", hex_string);
+    char** decimals = splitstr(hex_string, 2);
+    
+    int size = string_array_size(decimals);
+    repeat(size) {
+        char* str = decimals[counter];
+        printf("%s", str);
+    }
+    
     return 0;
 }
