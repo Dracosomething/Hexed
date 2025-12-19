@@ -1,4 +1,5 @@
 ﻿#include <stdio.h>
+#include "string.h"
 
 int main(void) {
     char* hex_string = "";
