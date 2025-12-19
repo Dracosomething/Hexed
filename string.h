@@ -76,42 +76,52 @@ int isupper(char to_check) {
     return to_check >= 'A' && to_check <= 'Z';
 }
 
-// difference uppercase and lowercase is 32
-// lowest lowercase is 97
-// lowest uppercase is 65
-int contains_any_ignore_case(char* string, char list[]) {
-    int contains = 0;
-    int length = strlen_custom(list);
-    char uppercase_list[length];
-
+void init_uppercase_list(char* p_list, char lowercase_list[]) {
+    int length = strlen_custom(lowercase_list);
     for (int i = 0; i < length; i++) {
-        char current = list[i];
+        char current = lowercase_list[i];
 
         if (is_num(current)) {
-            uppercase_list[i] = current;
+            p_list[i] = current;
             continue;
         }
 
         if (islower(current)) {
             char uppercase_current = current - 32;
-            uppercase_list[i] = uppercase_current;
+            p_list[i] = uppercase_current;
             continue;
         }
 
-        uppercase_list[i] = current;
+        p_list[i] = current;
+    }    
+}
+
+int equals_any_ignore_case(char to_check, char list[]) {
+    int contains = 0;
+    
+    int length = strlen_custom(list);
+    char uppercase_list[length];
+    init_uppercase_list(uppercase_list, list);
+
+    repeat(length) {
+        char lowercase = list[counter];
+        char uppercase = list[counter];
+
+        contains = to_check == lowercase || to_check == uppercase;
+
+        if (contains)
+            break;
     }
+
+    return contains;
+}
+
+int contains_any_ignore_case(char* string, char list[]) {
+    int contains = 0;
 
     for (int i = 0; i < strlen_custom(string); i++) {
         char current = string[i];
-        repeat(length) {
-            char lowercase = list[counter];
-            char uppercase = list[counter];
-
-            contains = current == lowercase || current == uppercase;
-
-            if (contains)
-                break;
-        }
+        contains = equals_any_ignore_case(current, list);
         if (contains)
             break;
     }

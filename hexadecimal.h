@@ -4,6 +4,7 @@
 
 #ifndef HEXADECIMAL_H
 #define HEXADECIMAL_H
+#include "string.h"
 
 int parse_character(char hex_byte) {
     char hex_letters[] = {'a', 'b', 'c', 'd', 'e', 'f'};
