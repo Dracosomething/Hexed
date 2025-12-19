@@ -14,8 +14,7 @@ int strlen_custom(const char* string) {
         len++;
         string++;
     }
-
-
+    
     return len;
 }
 
@@ -25,9 +24,10 @@ void clearstr(char* string) {
     }
 }
 
-char** splitstr(char* string, int len) {
-    char* strings[];
+void splitstr(char* string, int len, char** to_set) {
     int str_length = strlen_custom(string);
+    int final_size = str_length / len;
+    char* strings[final_size];
     int strings_cursor = 0;
     
     char current[len];
@@ -46,25 +46,19 @@ char** splitstr(char* string, int len) {
         current_cursor++;
     }
 
-    return strings;
+    *to_set = strings;
 }
 
 char* remove_first(char* string) {
-    char new_str[];
-
-    for (int i = 1; i < strlen_custom(string); i++) {
-        char character = string[i];
-        new_str[i-1] = character;
-    }
-
-    return new_str;
+    string++;
+    return string;
 }
 
 int starts_with(char* string, char check) {
     return string[0] == check;
 }
 
-int islower(char to_check) {
+int islower_custom(char to_check) {
     return to_check >= 'a' && to_check <= 'z';
 }
 
@@ -72,43 +66,37 @@ int is_num(char to_check) {
     return to_check >= '0' && to_check <= '9';
 }
 
-int isupper(char to_check) {
+int isupper_custom(char to_check) {
     return to_check >= 'A' && to_check <= 'Z';
 }
 
-void init_uppercase_list(char* p_list, char lowercase_list[]) {
-    int length = strlen_custom(lowercase_list);
-    for (int i = 0; i < length; i++) {
-        char current = lowercase_list[i];
+char get_lower(char uppercase) {
+    return uppercase + 32;
+}
 
-        if (is_num(current)) {
-            p_list[i] = current;
-            continue;
-        }
-
-        if (islower(current)) {
-            char uppercase_current = current - 32;
-            p_list[i] = uppercase_current;
-            continue;
-        }
-
-        p_list[i] = current;
-    }    
+char get_upper(char lowercase) {
+    return lowercase - 32;
 }
 
 int equals_any_ignore_case(char to_check, char list[]) {
     int contains = 0;
     
     int length = strlen_custom(list);
-    char uppercase_list[length];
-    init_uppercase_list(uppercase_list, list);
 
     repeat(length) {
-        char lowercase = list[counter];
-        char uppercase = list[counter];
+        char normal = list[counter];
+        char extra;
 
-        contains = to_check == lowercase || to_check == uppercase;
-
+        if (is_num(normal)) {
+            contains = to_check == normal;
+        }
+        if (islower_custom(normal)) {
+            extra = get_upper(normal);
+        }
+        if (isupper_custom(normal)) {
+            extra = get_lower(normal);
+        }
+        
         if (contains)
             break;
     }
@@ -116,17 +104,8 @@ int equals_any_ignore_case(char to_check, char list[]) {
     return contains;
 }
 
-int contains_any_ignore_case(char* string, char list[]) {
-    int contains = 0;
-
-    for (int i = 0; i < strlen_custom(string); i++) {
-        char current = string[i];
-        contains = equals_any_ignore_case(current, list);
-        if (contains)
-            break;
-    }
-    
-    return contains;
+int string_array_size(char* array[]) {
+    return sizeof(array) - sizeof(array[0]);
 }
 
 #endif //STRING_H

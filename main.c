@@ -1,17 +1,17 @@
 ﻿#include <stdio.h>
+#include "input.h"
 #include "string.h"
 
 int main(void) {
-    char* hex_string = "";
-
+    setvbuf(stdout, nullptr, _IOLBF, stdout->_bufsiz);
+    
     printf("Input hex text\n");
-    scanf("%s", &hex_string);
-
+    char* hex_string = read_line();
+    
     if (starts_with(hex_string, '#')) {
-        remove_first(hex_string);
+        hex_string = remove_first(hex_string);
     }
 
-    char** bytes = splitstr(hex_string, 2);
-    
+    printf("input %s", hex_string);
     return 0;
 }
