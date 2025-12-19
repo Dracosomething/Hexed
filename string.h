@@ -41,7 +41,7 @@ char** splitstr(char* string, int len) {
         }
 
         if (current_cursor == 0) {
-            strings[strings_cursor] = malloc(len * sizeof(len) + 1);
+            strings[strings_cursor] = malloc(len * sizeof(char) + 1);
         }
         
         strings[strings_cursor][current_cursor++] = character;
@@ -94,9 +94,11 @@ int equals_any_ignore_case(char to_check, char list[]) {
         }
         if (islower_custom(normal)) {
             extra = get_upper(normal);
+            contains = to_check == extra || to_check == normal;
         }
         if (isupper_custom(normal)) {
             extra = get_lower(normal);
+            contains = to_check == extra || to_check == normal;
         }
         
         if (contains)
@@ -104,10 +106,6 @@ int equals_any_ignore_case(char to_check, char list[]) {
     }
 
     return contains;
-}
-
-int string_array_size(char* array[]) {
-    return sizeof(array) - sizeof(array[0]);
 }
 
 #endif //STRING_H

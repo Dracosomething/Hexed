@@ -1,6 +1,7 @@
 ﻿#include <stdio.h>
 #include "input.h"
 #include "string.h"
+#include "hexadecimal.h"
 
 int main(void) {
     setvbuf(stdout, nullptr, _IOLBF, stdout->_bufsiz);
@@ -13,12 +14,15 @@ int main(void) {
     }
 
     char** decimals = splitstr(hex_string, 2);
+    int size = strlen_custom(hex_string) / 2;
     
-    int size = string_array_size(decimals);
+    char decoded[size];
     repeat(size) {
-        char* str = decimals[counter];
-        printf("%s", str);
+        char* decimal_hex = decimals[counter];
+        decoded[counter] = get_decimal_value(decimal_hex);
     }
-    
+
+    printf("%s", decoded);
+
     return 0;
 }

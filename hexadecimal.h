@@ -13,7 +13,7 @@ int parse_character(char hex_byte) {
         int code = hex_byte;
         int to_remove = 55;
 
-        if (islower(hex_byte)) {
+        if (islower_custom(hex_byte)) {
             to_remove += 32;
         }
 
@@ -26,8 +26,11 @@ int parse_character(char hex_byte) {
     return -1;
 }
 
-int get_decimal_value() {
-    
+char get_decimal_value(char* decimal) {
+    int first_int = parse_character(decimal[0]);
+    int second_int = parse_character(decimal[1]);
+
+    return (first_int * 16) + second_int;
 }
 
 #endif //HEXADECIMAL_H
