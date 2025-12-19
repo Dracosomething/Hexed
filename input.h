@@ -8,11 +8,11 @@
 #include <stdlib.h>
 
 char* read_line() {
-    int cursor = 0; // current position in std in
-    int character; // the current character that we are on in std in
-    int p_4KB = 4096; // 4 kb
-    int allocated_memory = p_4KB * sizeof(char); // current allocated memory
-    char* p_string = malloc(allocated_memory); // string line is stored in
+    int cursor = 0;
+    int character;
+    int p_4KB = 4096;
+    int allocated_memory = p_4KB * sizeof(char);
+    char* p_string = malloc(allocated_memory);
 
     while (p_string != nullptr && (character = getchar()) != '\n' && character != EOF) {
         if (cursor == allocated_memory) {
