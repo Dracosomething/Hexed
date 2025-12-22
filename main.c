@@ -3,8 +3,10 @@
 #include "string.h"
 #include "hexadecimal.h"
 
-int main(void) {
+int main(int argc, char** argv) {
     setvbuf(stdout, nullptr, _IOLBF, stdout->_bufsiz);
+
+    
     
     printf("Input hex text\n");
     char* hex_string = read_line();

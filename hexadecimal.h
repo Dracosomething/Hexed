@@ -2,6 +2,7 @@
 // Created by alias on 12/19/2025.
 //
 
+#pragma once
 #ifndef HEXADECIMAL_H
 #define HEXADECIMAL_H
 #include "string.h"

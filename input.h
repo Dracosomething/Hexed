@@ -2,6 +2,7 @@
 // Created by alias on 12/19/2025.
 //
 
+#pragma once
 #ifndef INPUT_H
 #define INPUT_H
 #include <stdio.h>

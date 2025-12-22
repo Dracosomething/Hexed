@@ -1,7 +1,7 @@
 ﻿//
 // Created by alias on 12/18/2025.
 //
-
+#pragma once
 #ifndef STRING_H
 #define STRING_H
 
