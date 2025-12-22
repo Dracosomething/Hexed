@@ -4,7 +4,8 @@ project(hexed C)
 set(CMAKE_C_STANDARD 23)
 
 add_executable(hexed main.c
-        string.h
+        util.h
         hexadecimal.h
         input.h
+        arg_parser.h
 )

@@ -2,8 +2,8 @@
 // Created by alias on 12/18/2025.
 //
 #pragma once
-#ifndef STRING_H
-#define STRING_H
+#ifndef UTIL_H
+#define UTIL_H
 
 #define repeat(AMOUNT) for (int counter = 0; counter < AMOUNT; counter++)
 
@@ -108,4 +108,4 @@ int equals_any_ignore_case(char to_check, char list[]) {
     return contains;
 }
 
-#endif //STRING_H
+#endif //UTIL_H

@@ -1,12 +1,10 @@
 ﻿#include <stdio.h>
 #include "input.h"
-#include "string.h"
+#include "util.h"
 #include "hexadecimal.h"
 
 int main(int argc, char** argv) {
     setvbuf(stdout, nullptr, _IOLBF, stdout->_bufsiz);
-
-    
     
     printf("Input hex text\n");
     char* hex_string = read_line();
@@ -25,6 +23,6 @@ int main(int argc, char** argv) {
     }
 
     printf("%s", decoded);
-
+    
     return 0;
 }
