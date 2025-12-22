@@ -14,42 +14,14 @@ typedef struct arg_pair {
     char* value;
 } t_arg_pair;
 
-char* as_string(struct arg_pair pair) {
-    if (pair.value == nullptr)
-        return pair.key;
-    int key_len = strlen_custom(pair.key);
-    int value_len = strlen_custom(pair.value);
-    int total_len = key_len + 1 + value_len;
-
-    char* string = (char*) calloc(total_len, sizeof(char));
-    repeat(total_len) {
-        if (counter < key_len) {
-            string[counter] = pair.key[counter];
-            continue;
-        }
-        if (counter == key_len) {
-            string[counter] = ' ';
-            continue;
-        }
-        if (counter - value_len >= value_len) {
-            int value_index = counter - (value_len*2);
-            string[counter] = pair.value[value_index];
-        }
-    }
-
-    return string;
-}
-
 typedef struct arg_parser {
-    int* argc;
+    int argc;
     t_arg_pair* argv;
 } t_arg_parser;
 
 void init_arg_parser(struct arg_parser* parser, int argc, char** argv) {
     int arg_counter = 0;
-    int largest_len = 0;
-    parser->argc = &arg_counter;
-    parser->argv = malloc(argc * sizeof(char*));
+    (*parser).argv = malloc(argc * sizeof(struct arg_parser));
     for(int counter = 1; counter < argc; counter++) {
         t_arg_pair pair;
         char* string = argv[counter];
@@ -62,17 +34,13 @@ void init_arg_parser(struct arg_parser* parser, int argc, char** argv) {
             pair.value = nullptr;
         }
 
-        if (strlen_custom(as_string(pair)) > largest_len) {
-            largest_len = strlen_custom(as_string(pair));
-        }
-
-        parser->argv[arg_counter++] = pair;
+        (*parser).argv[arg_counter++] = pair;
     }
-    parser->argv = realloc(parser->argv, arg_counter + 1);
+    (*parser).argc = arg_counter;
 }
 
 char* get_value_string(struct arg_parser parser, char* argument) {
-    repeat(*parser.argc) {
+    repeat(parser.argc) {
         struct arg_pair pair = parser.argv[counter];
         if (pair.key == argument) {
             return pair.value;
