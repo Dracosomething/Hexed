@@ -42,7 +42,7 @@ void init_arg_parser(struct arg_parser* parser, int argc, char** argv) {
 char* get_value_string(struct arg_parser parser, char* argument) {
     repeat(parser.argc) {
         struct arg_pair pair = parser.argv[counter];
-        if (pair.key == argument) {
+        if (str_matches(pair.value, argument)) {
             return pair.value;
         }
     }

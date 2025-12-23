@@ -108,4 +108,22 @@ int equals_any_ignore_case(char to_check, char list[]) {
     return contains;
 }
 
+/**
+ * TODO:
+ * check every character against eachother.
+ */
+int str_matches(char* string1, char* string2) {
+    int len1 = strlen_custom(string1);
+    int len2 = strlen_custom(string2);
+    if (len1 != len2)
+        return 0;
+    repeat(len1) {
+        char char1 = string1[counter];
+        char char2 = string2[counter];
+        if (char1 != char2)
+            return 0;
+    }
+    return 1;
+}
+
 #endif //UTIL_H
